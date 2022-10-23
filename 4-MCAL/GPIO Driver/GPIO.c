@@ -6,8 +6,7 @@
 GPIO_ERROR_EN GPIO_pin_init(GPIO_PIN_ST* PIN){
 
 
-    // Safety check on the pin
-    if (PIN->pin > 7 || PIN->pin < 0)
+    if (PIN->pin > 7 )
     {
         return WRONG_PIN;
     }
@@ -25,13 +24,13 @@ GPIO_ERROR_EN GPIO_pin_init(GPIO_PIN_ST* PIN){
     switch ( PIN->port)
     {
     case PORTA:
-        if(PIN->direction){ SET_BIT(GPIO_PORTA_DIR_R, PIN->pin); } // Setting the pin Direction
+        if(PIN->direction){ SET_BIT(GPIO_PORTA_DIR_R, PIN->pin); } 
         else { CLR_BIT(GPIO_PORTA_DIR_R, PIN->pin); }
 
         if (PIN->alt_func == 0)
-        { SET_BIT(GPIO_PORTA_AFSEL_R , PIN->pin); } // Setting the Alternate Function to zero to make sure its for input/output
+        { SET_BIT(GPIO_PORTA_AFSEL_R , PIN->pin); } 
 
-        SET_BIT(GPIO_PORTA_DEN_R , PIN->pin);   // Enabling the Digital input/output
+        SET_BIT(GPIO_PORTA_DEN_R , PIN->pin);   
 
         /**
          * Future Work:
@@ -102,14 +101,14 @@ GPIO_ERROR_EN GPIO_pin_init(GPIO_PIN_ST* PIN){
 }
 GPIO_ERROR_EN GPIO_port_init( u8 port){
 
-    if (port > 5 || port < 0 )
+    if (port > 5  )
     {
         return WRONG_PORT;
     }
-    //initializing the clock for the required port
+    
     SET_BIT(SYSCTL_RCGCGPIO_R , port);
 
-    
+			return GPIO_OK;
 }
 
 GPIO_ERROR_EN GPIO_pin_write(GPIO_PIN_ST* PIN , u8 value){
@@ -142,7 +141,7 @@ GPIO_ERROR_EN GPIO_pin_write(GPIO_PIN_ST* PIN , u8 value){
 
     default:
         return WRONG_PORT;
-        break;
+        
     }
 
     return GPIO_OK;
@@ -178,7 +177,7 @@ GPIO_ERROR_EN GPIO_pin_toggle(GPIO_PIN_ST* PIN){
 
     default:
         return WRONG_PORT;
-        break;
+      
     }
 
     return GPIO_OK;
@@ -213,7 +212,7 @@ GPIO_ERROR_EN GPIO_pin_read(GPIO_PIN_ST* PIN , u8* result){
 
     default:
         return WRONG_PORT;
-        break;
+       
     }
 
     return GPIO_OK;
