@@ -56,6 +56,9 @@ void  SYSTICK_delay_m (u32 delayNms ){
      * writing any value to this register would clear it and that will make it reload the required value.
      */
 
+    while (counter);
+    
+
     NVIC_ST_CURRENT_R = 1;
 
     NVIC_ST_CTRL_R = 7 ; //START TIMER 
