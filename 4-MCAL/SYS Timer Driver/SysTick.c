@@ -1,16 +1,14 @@
 #include "SysTick.h"
 
 void static (*SYSTICK_callback)(void);
+void sysTick_Handler(void) ;
 
 u32 volatile counter  = 0;
 
 void SYSTICK_init(void){
 
-    /**
-     * Enable NVIC 
-     * give the timer priority
-     * 
-     * */
+    /*Global interrupt enable*/
+	__enable_irq();
 
     /**
      * "STCTRL"
@@ -66,7 +64,7 @@ void  SYSTICK_delay_m (u32 delayNms ){
 }
 
 
-void Systick_Handler(void) {
+void systick_Handler(void) {
 
 	if (counter --  == 0) {
         CLR_BIT(NVIC_ST_CTRL_R , 0); // stop timer so it won't inerrupt
