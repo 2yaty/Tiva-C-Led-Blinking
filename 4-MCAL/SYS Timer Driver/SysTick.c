@@ -31,23 +31,53 @@ void SYSTICK_init(void){
 
 }
 
-void SYSTICK_delay_m(u32 delayNms , void (*callback)(void)) {
+void SYSTICK_delay_m_callback(u32 delayNms , void (*callback)(void)) {
 
 
     counter = delayNms;
 
     SYSTICK_callback = callback;
 
-    SET_BIT(NVIC_ST_CTRL_R , 0); //START TIMER
+    /**
+     * "NVIC_ST_CURRENT_R"
+     * writing any value to this register would clear it and that will make it reload the required value.
+     */
 
+    NVIC_ST_CURRENT_R = 1;
+
+    NVIC_ST_CTRL_R = 7 ; //START TIMER 
+
+}
+
+void  SYSTICK_delay_m (u32 delayNms ){
+
+    counter = delayNms;
+
+    /**
+     * "NVIC_ST_CURRENT_R"
+     * writing any value to this register would clear it and that will make it reload the required value.
+     */
+
+    NVIC_ST_CURRENT_R = 1;
+
+    NVIC_ST_CTRL_R = 7 ; //START TIMER 
+    
+    
 }
 
 
 void Systick_Handler(void) {
 
 	if (counter --  == 0) {
-        CLR_BIT(NVIC_ST_CTRL_R , 0);
-        SYSTICK_callback();
+        CLR_BIT(NVIC_ST_CTRL_R , 0); // stop timer so it won't inerrupt
+
+        if (SYSTICK_callback != NULL)
+        {
+            SYSTICK_callback();
+            SYSTICK_callback = NULL;
+        }
+        
+        
 	}
 
 }

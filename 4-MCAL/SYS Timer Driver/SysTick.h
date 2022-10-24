@@ -9,6 +9,8 @@
 
 void SYSTICK_init(void);
 
-void SYSTICK_delay_m(u32 delayNms , void (*callback)(void));
+void SYSTICK_delay_m_callback(u32 delayNms , void (*callback)(void));
+
+void  SYSTICK_delay_m (u32 delayNms );
 
 #endif
