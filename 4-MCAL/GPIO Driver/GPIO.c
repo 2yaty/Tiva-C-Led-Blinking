@@ -217,3 +217,62 @@ GPIO_ERROR_EN GPIO_pin_read(GPIO_PIN_ST* PIN , u8* result){
 
     return GPIO_OK;
 }
+
+
+GPIO_ERROR_EN GPIO_pin_EN_interrupt(GPIO_PIN_ST* PIN , u8 edge , u8 singlEdge , u8 lowlevel){
+
+    switch (PIN->port)
+    {
+    case PORTA:
+        if (edge )    SET_BIT(GPIO_PORTA_IS_R , PIN->pin);     else CLR_BIT(GPIO_PORTA_IS_R , PIN->pin);
+        if(singlEdge) SET_BIT(GPIO_PORTA_IBE_R , PIN->pin); else    CLR_BIT(GPIO_PORTA_IBE_R , PIN->pin);
+        if(lowlevel)  SET_BIT(GPIO_PORTA_IEV_R , PIN->pin); else    CLR_BIT(GPIO_PORTA_IEV_R , PIN->pin); 
+                      CLR_BIT(GPIO_PORTA_ICR_R , PIN->pin);
+                      SET_BIT(GPIO_PORTA_IM_R , PIN->pin);  
+        break;
+    
+    case PORTB:
+        if (edge )    SET_BIT(GPIO_PORTB_IS_R , PIN->pin);     else CLR_BIT(GPIO_PORTB_IS_R , PIN->pin);
+        if(singlEdge) SET_BIT(GPIO_PORTB_IBE_R , PIN->pin); else    CLR_BIT(GPIO_PORTB_IBE_R , PIN->pin);
+        if(lowlevel)  SET_BIT(GPIO_PORTB_IEV_R , PIN->pin); else    CLR_BIT(GPIO_PORTB_IEV_R , PIN->pin); 
+                      CLR_BIT(GPIO_PORTB_ICR_R , PIN->pin);
+                      SET_BIT(GPIO_PORTB_IM_R , PIN->pin);  
+        break;
+
+    case PORTC:
+        if (edge )    SET_BIT(GPIO_PORTC_IS_R , PIN->pin);     else CLR_BIT(GPIO_PORTC_IS_R , PIN->pin);
+        if(singlEdge) SET_BIT(GPIO_PORTC_IBE_R , PIN->pin); else    CLR_BIT(GPIO_PORTC_IBE_R , PIN->pin);
+        if(lowlevel)  SET_BIT(GPIO_PORTC_IEV_R , PIN->pin); else    CLR_BIT(GPIO_PORTC_IEV_R , PIN->pin); 
+                      CLR_BIT(GPIO_PORTC_ICR_R , PIN->pin);
+                      SET_BIT(GPIO_PORTC_IM_R , PIN->pin);  
+        break;
+
+    case PORTD:
+        if (edge )    SET_BIT(GPIO_PORTD_IS_R , PIN->pin);     else CLR_BIT(GPIO_PORTD_IS_R , PIN->pin);
+        if(singlEdge) SET_BIT(GPIO_PORTD_IBE_R , PIN->pin); else    CLR_BIT(GPIO_PORTD_IBE_R , PIN->pin);
+        if(lowlevel)  SET_BIT(GPIO_PORTD_IEV_R , PIN->pin); else    CLR_BIT(GPIO_PORTD_IEV_R , PIN->pin); 
+                      CLR_BIT(GPIO_PORTD_ICR_R , PIN->pin);
+                      SET_BIT(GPIO_PORTD_IM_R , PIN->pin);  
+        break;
+
+    case PORTE:
+        if (edge )    SET_BIT(GPIO_PORTE_IS_R , PIN->pin);     else CLR_BIT(GPIO_PORTE_IS_R , PIN->pin);
+        if(singlEdge) SET_BIT(GPIO_PORTE_IBE_R , PIN->pin); else    CLR_BIT(GPIO_PORTE_IBE_R , PIN->pin);
+        if(lowlevel)  SET_BIT(GPIO_PORTE_IEV_R , PIN->pin); else    CLR_BIT(GPIO_PORTE_IEV_R , PIN->pin); 
+                      CLR_BIT(GPIO_PORTE_ICR_R , PIN->pin);
+                      SET_BIT(GPIO_PORTE_IM_R , PIN->pin);  
+        break;
+
+    case PORTF:
+        if (edge )    SET_BIT(GPIO_PORTF_IS_R , PIN->pin);     else CLR_BIT(GPIO_PORTF_IS_R , PIN->pin);
+        if(singlEdge) SET_BIT(GPIO_PORTF_IBE_R , PIN->pin); else    CLR_BIT(GPIO_PORTF_IBE_R , PIN->pin);
+        if(lowlevel)  SET_BIT(GPIO_PORTF_IEV_R , PIN->pin); else    CLR_BIT(GPIO_PORTF_IEV_R , PIN->pin); 
+                      CLR_BIT(GPIO_PORTF_ICR_R , PIN->pin);
+                      SET_BIT(GPIO_PORTF_IM_R , PIN->pin);  
+        break;
+
+    default:
+        return WRONG_PORT;
+       
+    }
+}

@@ -7,7 +7,7 @@ void NVIC_SetInterrupt  (u8 InterruptID){
     /*Global interrupt enable*/
 	__enable_irq();
 
-    u8 registerNumber = (InterruptID - 16) / 32;
+    u8 registerNumber = (InterruptID - 1) / 32;
 	u8 bitNumber = (InterruptID - 16) % 32;
 
 	switch (registerNumber) {
@@ -41,7 +41,7 @@ void NVIC_SetInterrupt  (u8 InterruptID){
 }
 void NVIC_ClearInterrupt(u8 InterruptID){
 
-    u8 registerNumber = (InterruptID - 16) / 32;
+    u8 registerNumber = (InterruptID - 1) / 32;
 	u8 bitNumber = (InterruptID - 16) % 32;
 
 	switch (registerNumber) {
@@ -75,7 +75,7 @@ void NVIC_ClearInterrupt(u8 InterruptID){
 }
 void NVIC_SetPending    (u8 InterruptID){
 
-    u8 registerNumber = (InterruptID - 16) / 32;
+    u8 registerNumber = (InterruptID - 1) / 32;
 	u8 bitNumber = (InterruptID - 16) % 32;
 
 	switch (registerNumber) {
@@ -107,7 +107,7 @@ void NVIC_SetPending    (u8 InterruptID){
 	}
 }
 void NVIC_ClearPending  (u8 InterruptID){
-    u8 registerNumber = (InterruptID - 16) / 32;
+    u8 registerNumber = (InterruptID - 1) / 32;
 	u8 bitNumber = (InterruptID - 16) % 32;
 
 	switch (registerNumber) {

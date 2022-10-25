@@ -67,6 +67,7 @@ GPIO_ERROR_EN GPIO_port_init( u8 port);
 GPIO_ERROR_EN GPIO_pin_write(GPIO_PIN_ST* pin , u8 value);
 GPIO_ERROR_EN GPIO_pin_toggle(GPIO_PIN_ST* pin);
 GPIO_ERROR_EN GPIO_pin_read(GPIO_PIN_ST* pin , u8* result);
+GPIO_ERROR_EN GPIO_pin_EN_interrupt(GPIO_PIN_ST* pin , u8 edge , u8 singlEdge , u8 lowlevel);
 
 
 
